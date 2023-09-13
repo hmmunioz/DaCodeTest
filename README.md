@@ -8,7 +8,7 @@ This is a test application for the DaCodes company, which consists of showing a 
 Download or clone this repo by using the link below:
 
 ```
-git@github.com:hmmunioz/DaCodes_Prueba.git
+git@github.com:hmmunioz/DaCodeTest.git
 ```
 
 **Step 2:**
