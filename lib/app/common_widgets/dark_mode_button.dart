@@ -26,7 +26,7 @@ class DarkModeButtonState extends State<DarkModeButton> {
       onTap: _onChange,
       child: Icon(
         Icons.dark_mode,
-        color: Theme.of(context).primaryColorLight,
+        color: Theme.of(context).cardColor,
         size: size.width * widget.sizeIcon,
       ),
     );

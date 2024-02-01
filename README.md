@@ -1,6 +1,6 @@
-# DaCodes Test
+# FulltimeForce Test
 
-This is a test application for the DaCodes company, which consists of showing a card with the information of a series, in addition to showing its seasons, chapters and details of each chapter. It also has a search engine to choose other series.
+This is a test application for the FulltimeForce company, which consists of showing a card with the information of a commits, in addition to showing its seasons, chapters and details of each chapter. It also has a search engine to choose other commits.
 ## How to Use
 
 **Step 1:**
@@ -27,7 +27,7 @@ Run:
 flutter run
 ```
 
-## DaCodes Features:
+## FulltimeForce Features:
 
 - Serie
 - Season
@@ -61,7 +61,7 @@ flutter run
 Here is the core folder structure which flutter provides.
 
 ```
-DaCodes_TEST/
+FulltimeForce_test/
 |- android
 |- build
 |- ios

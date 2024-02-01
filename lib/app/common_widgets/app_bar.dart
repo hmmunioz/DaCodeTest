@@ -1,10 +1,10 @@
-import 'package:dacodes_test/app/common_widgets/dark_mode_button.dart';
+import 'package:fulltimeforce_test/app/common_widgets/dark_mode_button.dart';
 import 'package:flutter/material.dart';
 
 import 'btn_back_widget.dart';
 
-class AppBarDacodes extends StatelessWidget {
-  const AppBarDacodes({
+class AppBarTest extends StatelessWidget {
+  const AppBarTest({
     Key? key,
     required this.text,
   }) : super(key: key);
@@ -20,7 +20,7 @@ class AppBarDacodes extends StatelessWidget {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: size.height * 0.02,
-          color: Theme.of(context).primaryColorLight,
+          color: Theme.of(context).cardColor,
         ),
       ),
       centerTitle: true,
@@ -30,7 +30,7 @@ class AppBarDacodes extends StatelessWidget {
           child: DarkModeButton(),
         )
       ],
-      backgroundColor: Theme.of(context).highlightColor,
+      backgroundColor: Theme.of(context).hintColor,
     );
   }
 }

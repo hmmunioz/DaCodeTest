@@ -1,6 +1,7 @@
 import 'dart:convert' show utf8;
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Future<Map<String, String>> getHeaders() async {
   Map<String, String> headers = {
@@ -16,6 +17,14 @@ String decodedUtf8(String text) {
   } catch (e) {
     return text;
   }
+}
+
+String formatDateString(String dateStr) {
+  DateTime dateTime = DateTime.parse(dateStr).toLocal();
+
+  var formatter = DateFormat("dd MMM yyyy \nhh:mm a", "es_ES");
+
+  return formatter.format(dateTime);
 }
 
 gotoPage(BuildContext context, Widget widget) {

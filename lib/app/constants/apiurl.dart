@@ -1,4 +1,4 @@
 class ApiUrlValues {
   ApiUrlValues._();
-  static const apiBaseUrl = 'http://www.omdbapi.com/?apikey=';
+  static const apiBaseUrl = 'https://api.github.com/repos/';
 }

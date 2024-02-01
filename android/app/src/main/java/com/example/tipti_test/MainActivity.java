@@ -1,4 +1,4 @@
-package com.example.dacodes_test;
+package com.example.fulltimeforce_test;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,11 +1,11 @@
 {
-    "dacodesTest" : "DaCodes Test",
-    "series" : "Series",
+    "fulltimeforceTest" : "FulltimeForce Test",
+    "commits" : "Commits",
     "resultNoFound" : "Result no Found",
     "tryAgain" : "An error ocurred, try again please",
     "nameUser" : "Mauricio Muñoz",
     "loadingPoints" : "Loading...",
-    "wellcome" : "Wellcome to DaCodes Test",
+    "wellcome" : "Wellcome to FulltimeForce Test",
     "enter" : "Enter",
     "search" : "Search...",  
     "results":"Result:",
@@ -22,5 +22,6 @@
     "episodes":"Episodes",
     "episode":"Episode",
     "view":"View",
-    "title":"Title"
+    "title":"Title",
+    "copytext":"Copy to clipboard"
   }

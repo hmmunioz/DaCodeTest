@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:dacodes_test/app/_childrens/serie/bloc/bloc.dart' as bloc;
+import 'package:fulltimeforce_test/app/_childrens/commits/bloc/bloc.dart'
+    as bloc;
 
 class ListViewInfinite extends StatelessWidget {
   ListViewInfinite({
@@ -64,9 +65,9 @@ class ListViewInfinite extends StatelessWidget {
   }
 
   void _bloclistener(BuildContext context, bloc.State state) {
-    if (state is bloc.SelectFilterState) {
+    /*    if (state is bloc.SelectFilterState) {
       _internalController.jumpTo(0);
-    }
+    } */
   }
 
   @override

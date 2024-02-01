@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dacodes_test/app/models/episode_model.dart';
-import 'package:dacodes_test/app/models/season_model.dart';
-import 'package:dacodes_test/app/models/serie_model.dart';
-import 'package:dacodes_test/app/repository/repository.dart';
+import 'package:fulltimeforce_test/app/models/episode_model.dart';
+import 'package:fulltimeforce_test/app/models/season_model.dart';
+import 'package:fulltimeforce_test/app/models/serie_model.dart';
+import 'package:fulltimeforce_test/app/repository/repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dacodes_test/app/_childrens/serie/bloc/bloc.dart';
+import 'package:fulltimeforce_test/app/_childrens/serie/bloc/bloc.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockRepository extends Mock implements Repository {}
@@ -21,32 +21,32 @@ void main() {
   setUpAll(() => bloc = Bloc(repository: mockRepository));
 
   blocTest<Bloc, State>(
-    'emits LoadingSeriesState and LoadedSeriesState when GetSeriesEvent is added',
+    'emits LoadingCommitsState and LoadedCommitsState when GetCommitsEvent is added',
     build: () {
       when(
-        () => mockRepository.getSeriesApi(search: ''),
+        () => mockRepository.getCommitsApi(search: ''),
       ).thenAnswer((_) async => serieModel);
       return bloc;
     },
-    act: (bloc) => bloc.add(const GetSeriesEvent('')),
+    act: (bloc) => bloc.add(const GetCommitsEvent('')),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const LoadingSeriesState(Model()),
-      const LoadedSeriesState(Model()),
+      const LoadingCommitsState(Model()),
+      const LoadedCommitsState(Model()),
     ],
   );
   blocTest<Bloc, State>(
-    'emits LoadingSeriesState and ErrorState when GetSeriesEvent is added',
+    'emits LoadingCommitsState and ErrorState when GetCommitsEvent is added',
     build: () {
       when(
-        () => mockRepository.getSeriesApi(),
+        () => mockRepository.getCommitsApi(),
       ).thenAnswer((_) async => serieModel);
       return bloc;
     },
-    act: (bloc) => bloc.add(const GetSeriesEvent('')),
+    act: (bloc) => bloc.add(const GetCommitsEvent('')),
     wait: const Duration(milliseconds: 100),
     expect: () => [
-      const LoadingSeriesState(Model()),
+      const LoadingCommitsState(Model()),
       const ErrorState(Model()),
     ],
   );

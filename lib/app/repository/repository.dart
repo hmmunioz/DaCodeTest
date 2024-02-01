@@ -1,68 +1,28 @@
-import 'package:dacodes_test/app/models/episode_model.dart';
-import 'package:dacodes_test/app/models/season_model.dart';
-import 'package:dacodes_test/app/models/serie_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:dacodes_test/app/utils/helper.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
-
 import '../constants/apiurl.dart';
+import '../models/response_commit_model.dart';
 
 class Repository {
-  Future<SerieModel?> getSeriesApi({String? search}) async {
-    final searchTemp =
-        search == '' || search == null ? 'Game of Thrones' : search;
-    final url = ApiUrlValues.apiBaseUrl +
-        (dotenv.env['API_KEY'] ?? '') +
-        "&t=$searchTemp";
-    final response =
-        await http.get(Uri.parse(url), headers: await getHeaders());
-    if (response.statusCode == 200) {
-      var decodedBody = decodedUtf8(response.body);
-      var jsonBody = json.decode(decodedBody);
-
-      return SerieModel.fromJson(jsonBody);
-    } else {
-      return null;
-    }
-  }
-
-  Future<SeasonModel?> getSeasonApi({
-    required String search,
-    required int season,
+  Future<List<ResponseCommitModel>> fetchCommits(
+    String repoOwner,
+    String repoName, {
+    int page = 0,
+    int size = 5,
   }) async {
-    final url = ApiUrlValues.apiBaseUrl +
-        (dotenv.env['API_KEY'] ?? '') +
-        "&t=$search&season=$season";
-    final response =
-        await http.get(Uri.parse(url), headers: await getHeaders());
+    final uri = "${ApiUrlValues.apiBaseUrl}$repoOwner/$repoName/commits";
+    final finalUri = uri + "?page=$page&per_page=$size&";
+    final response = await http.get(Uri.parse(finalUri));
+
     if (response.statusCode == 200) {
-      var decodedBody = decodedUtf8(response.body);
-      var jsonBody = json.decode(decodedBody);
-
-      return SeasonModel.fromJson(jsonBody);
+      var decodedBodyUtf8 = utf8.decode(response.bodyBytes);
+      List<dynamic> jsonBody = json.decode(decodedBodyUtf8) as List<dynamic>;
+      return jsonBody
+          .map((dynamic item) =>
+              ResponseCommitModel.fromJson(item as Map<String, dynamic>))
+          .toList();
     } else {
-      return null;
-    }
-  }
-
-  Future<EpisodeModel?> getEpisodeApi({
-    required String search,
-    required int season,
-    required int episode,
-  }) async {
-    final url = ApiUrlValues.apiBaseUrl +
-        (dotenv.env['API_KEY'] ?? '') +
-        "&t=$search&Season=$season&Episode=$episode";
-    final response =
-        await http.get(Uri.parse(url), headers: await getHeaders());
-    if (response.statusCode == 200) {
-      var decodedBody = decodedUtf8(response.body);
-      var jsonBody = json.decode(decodedBody);
-
-      return EpisodeModel.fromJson(jsonBody);
-    } else {
-      return null;
+      throw Exception('Failed to load commits');
     }
   }
 }

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dacodes_test">
+    package="com.example.fulltimeforce_test">
     <application
-        android:label="dacodes_test"
+        android:label="fulltimeforce_test"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -28,7 +28,7 @@
         </activity>
 
         <activity android:name="SensorActivity"></activity>
-        <activity android:name="com.example.dacodes_test.SensorActivity">
+        <activity android:name="com.example.fulltimeforce_test.SensorActivity">
 </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

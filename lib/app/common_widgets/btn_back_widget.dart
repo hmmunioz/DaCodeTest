@@ -14,7 +14,7 @@ class ButtonBack extends StatelessWidget {
       icon: Icon(
         Icons.arrow_back_rounded,
         size: size.height * 0.04,
-        color: Theme.of(context).primaryColorLight,
+        color: Theme.of(context).cardColor,
       ),
     );
   }

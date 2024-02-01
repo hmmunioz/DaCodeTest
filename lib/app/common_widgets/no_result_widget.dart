@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dacodes_test/app/common_widgets/btn_widget.dart';
-import 'package:dacodes_test/app/constants/assets.dart';
+import 'package:fulltimeforce_test/app/common_widgets/btn_widget.dart';
+import 'package:fulltimeforce_test/app/constants/assets.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class NoResultWidget extends StatelessWidget {

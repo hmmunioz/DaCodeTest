@@ -1,7 +1,7 @@
-import 'package:dacodes_test/app/_childrens/serie/pages/series_page.dart';
-import 'package:dacodes_test/app/common_widgets/dark_mode_button.dart';
-import 'package:dacodes_test/app/constants/assets.dart';
-import 'package:dacodes_test/app/constants/utils_screen.dart';
+import 'package:fulltimeforce_test/app/_childrens/commits/pages/commits_page.dart';
+import 'package:fulltimeforce_test/app/common_widgets/dark_mode_button.dart';
+import 'package:fulltimeforce_test/app/constants/assets.dart';
+import 'package:fulltimeforce_test/app/constants/utils_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -80,11 +80,11 @@ class SplashScreenPageState extends State<SplashScreenPage>
                 color: Colors.black.withOpacity(0.9),
                 gradient: LinearGradient(
                   colors: [
-                    Theme.of(context).backgroundColor,
                     Theme.of(context).cardColor,
+                    Theme.of(context).primaryColor,
                   ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.topRight,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
               ),
               child: Column(
@@ -92,9 +92,9 @@ class SplashScreenPageState extends State<SplashScreenPage>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    AssetsUIValues.logoDaCodes,
-                    width: size.width * .5,
-                    height: size.height * .1,
+                    AssetsUIValues.logoFulltimeForce,
+                    width: size.width * .8,
+                    height: size.height * .2,
                   ),
                   SizedBox(height: size.height * .04),
                   Text(
@@ -102,24 +102,27 @@ class SplashScreenPageState extends State<SplashScreenPage>
                     style: TextStyle(
                       fontSize: size.width * .065,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                   ),
                   SizedBox(height: size.height * .02),
-                  Text(
-                    translate('wellcome'), // Second text
-                    style: TextStyle(
-                      fontSize: size.width * .045,
-                      color: Colors.white,
-                    ),
-                  ),
+                  SizedBox(
+                      width: size.width * .8,
+                      child: Text(
+                        translate('wellcome'),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: size.width * .045,
+                          color: Theme.of(context).primaryColorLight,
+                        ),
+                      )),
                   SizedBox(height: size.height * .05),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SeriesPage(),
+                          builder: (context) => const CommitsPage(),
                         ),
                       );
                     },
