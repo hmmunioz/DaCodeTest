@@ -140,9 +140,10 @@ class _RightChild extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(5),
-                    width: size.width * .20,
+                    width: size.width * .22,
                     child: Text(
                       userName,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: size.height * .013,
