@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fulltimeforce_test/app/_childrens/commits/pages/commit_detail_page.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,6 @@ import 'package:fulltimeforce_test/app/_childrens/commits/bloc/bloc.dart'
 import '../../../common_widgets/card_skeleton.dart';
 import '../../../common_widgets/list_view_infinite.dart';
 import '../../../models/response_commit_model.dart';
-import 'package:flutter/services.dart';
 
 import '../../../utils/helper.dart';
 
@@ -69,12 +69,13 @@ class CommitTimelineUx extends StatelessWidget {
                     ),
                   ),
                   endChild: _RightChild(
-                      commitMessage: commitResponseItem.commit.message,
-                      userName: commitResponseItem.commit.author.name,
-                      userEmail: commitResponseItem.commit.author.email,
-                      url: commitResponseItem.html_url,
-                      urlImage: commitResponseItem.author.avatar_url,
-                      sha: commitResponseItem.sha),
+                    commitMessage: commitResponseItem.commit.message,
+                    userName: commitResponseItem.commit.author.name,
+                    userEmail: commitResponseItem.commit.author.email,
+                    url: commitResponseItem.html_url,
+                    urlImage: commitResponseItem.author.avatar_url,
+                    sha: commitResponseItem.sha,
+                  ),
                   beforeLineStyle: const LineStyle(
                     color: Colors.white,
                     thickness: 3,
@@ -161,26 +162,14 @@ class _RightChild extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CommitDetailPage(
-                              urlCommit: url,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        commitMessage,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: size.height * .015,
-                            decoration: TextDecoration.underline),
-                      ),
+                    Text(
+                      commitMessage,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.height * .015,
+                          decoration: TextDecoration.underline),
                     ),
                     SizedBox(
                       height: size.height * .01,
@@ -200,8 +189,8 @@ class _RightChild extends StatelessWidget {
           SizedBox(
             height: size.height * .01,
           ),
-          _ButtonCopyHash(
-            sha: sha,
+          _ButtonGoToBrowser(
+            url: url,
           ),
         ],
       ),
@@ -235,13 +224,13 @@ class _LeftChild extends StatelessWidget {
   }
 }
 
-class _ButtonCopyHash extends StatelessWidget {
-  const _ButtonCopyHash({
+class _ButtonGoToBrowser extends StatelessWidget {
+  const _ButtonGoToBrowser({
     Key? key,
-    required this.sha,
+    required this.url,
   }) : super(key: key);
 
-  final String sha;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -252,23 +241,28 @@ class _ButtonCopyHash extends StatelessWidget {
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {
-          Clipboard.setData(ClipboardData(text: sha));
-          const snackBar = SnackBar(content: Text('Copied to clipboard!'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CommitDetailPage(
+                urlCommit: url,
+              ),
+            ),
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              Icons.copy,
+              Icons.open_in_browser,
               size: size.height * .014,
             ),
             SizedBox(
               width: size.width * .01,
             ),
             Text(
-              "Hash",
+              translate("open"),
               style: TextStyle(
                 fontSize: size.height * .012,
                 color: Colors.white,
