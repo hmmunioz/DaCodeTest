@@ -23,5 +23,6 @@
     "episode":"Episode",
     "view":"View",
     "title":"Title",
-    "copytext":"Copy to clipboard"
+    "copytext":"Copy to clipboard",
+    "open":"Open"
   }
