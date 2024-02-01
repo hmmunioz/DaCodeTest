@@ -3,6 +3,8 @@ import 'package:fulltimeforce_test/app/models/response_commit_model.dart';
 import 'package:fulltimeforce_test/app/repository/repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../constants/constants.dart';
 part 'event.dart';
 part 'state.dart';
 
@@ -18,16 +20,16 @@ class Bloc extends bloc.Bloc<Event, State> {
   late Repository repository;
 
   Future<Model> _getCommits({
-    String owner = "hmmunioz",
-    String repo = "thingsboard",
+    String owner = ConstantsValues.owner,
+    String repo = ConstantsValues.repo,
   }) async {
     final oldCommits = state.model.commits;
     List<ResponseCommitModel> commitsList = [];
     if ((state.model.limit * (state.model.page)) < state.model.total ||
         state.model.total == 0) {
       final response = await repository.fetchCommits(
-        "hmmunioz",
-        "thingsboard",
+        owner,
+        repo,
         page: state.model.page,
         size: state.model.limit,
       );

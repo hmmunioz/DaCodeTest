@@ -8,6 +8,7 @@ import 'package:fulltimeforce_test/app/_childrens/commits/bloc/bloc.dart'
 
 import 'package:flutter_translate/flutter_translate.dart';
 
+import '../../../constants/constants.dart';
 import '../../../models/response_commit_model.dart';
 import '../widgets/timelime_commit_ux.dart';
 
@@ -18,7 +19,12 @@ class CommitsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => bloc.Bloc()
-        ..add(const bloc.GetCommitsEvent("hmmunioz", "thingsboard")),
+        ..add(
+          const bloc.GetCommitsEvent(
+            ConstantsValues.owner,
+            ConstantsValues.repo,
+          ),
+        ),
       child: _Content(),
     );
   }
@@ -71,9 +77,12 @@ class _Content extends StatelessWidget {
                         child: NoResultWidget(
                           title: translate('resultNoFound'),
                           onTap: () {
-                            context.read<bloc.Bloc>().add(
-                                const bloc.GetCommitsEvent(
-                                    "hmmunioz", "thingsboard"));
+                            context
+                                .read<bloc.Bloc>()
+                                .add(const bloc.GetCommitsEvent(
+                                  ConstantsValues.owner,
+                                  ConstantsValues.repo,
+                                ));
                           },
                         ),
                       );
@@ -82,9 +91,12 @@ class _Content extends StatelessWidget {
                         child: NoResultWidget(
                           title: translate('tryAgain'),
                           onTap: () {
-                            context.read<bloc.Bloc>().add(
-                                const bloc.GetCommitsEvent(
-                                    "hmmunioz", "thingsboard"));
+                            context
+                                .read<bloc.Bloc>()
+                                .add(const bloc.GetCommitsEvent(
+                                  ConstantsValues.owner,
+                                  ConstantsValues.repo,
+                                ));
                           },
                         ),
                       );

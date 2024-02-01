@@ -138,14 +138,19 @@ class _RightChild extends StatelessWidget {
                   SizedBox(
                     height: size.height * .01,
                   ),
-                  Text(
-                    userName,
-                    style: TextStyle(
-                      fontSize: size.height * .013,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    width: size.width * .20,
+                    child: Text(
+                      userName,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: size.height * .013,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
               Container(
