@@ -9,11 +9,9 @@ part of 'response_commit_model.dart';
 ResponseCommitModel _$ResponseCommitModelFromJson(Map<String, dynamic> json) =>
     ResponseCommitModel(
       sha: json['sha'] as String,
-      node_id: json['node_id'] as String,
       commit: CommitModel.fromJson(json['commit'] as Map<String, dynamic>),
       url: json['url'] as String,
-      html_url: json['html_url'] as String,
-      comments_url: json['comments_url'] as String,
+      htmlUrl: json['html_url'] as String,
       author: UserInfoModel.fromJson(json['author'] as Map<String, dynamic>),
       committer:
           UserInfoModel.fromJson(json['committer'] as Map<String, dynamic>),
@@ -26,11 +24,9 @@ Map<String, dynamic> _$ResponseCommitModelToJson(
         ResponseCommitModel instance) =>
     <String, dynamic>{
       'sha': instance.sha,
-      'node_id': instance.node_id,
       'commit': instance.commit,
       'url': instance.url,
-      'html_url': instance.html_url,
-      'comments_url': instance.comments_url,
+      'html_url': instance.htmlUrl,
       'author': instance.author,
       'committer': instance.committer,
       'parents': instance.parents,

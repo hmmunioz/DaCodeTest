@@ -24,37 +24,47 @@ class Bloc extends bloc.Bloc<Event, State> {
     String repo = ConstantsValues.repo,
   }) async {
     final oldCommits = state.model.commits;
-    List<ResponseCommitModel> commitsList = [];
-    if ((state.model.limit * (state.model.page)) < state.model.total ||
-        state.model.total == 0) {
-      final response = await repository.fetchCommits(
-        owner,
-        repo,
-        page: state.model.page,
-        size: state.model.limit,
-      );
-
-      if (response.isEmpty) {
-        return state.model.copyWith(
-          commits: state.model.commits,
-          total: 100,
-          limit: state.model.limit,
-          page: state.model.page + 1,
-          isLast: oldCommits!.isEmpty ? false : true,
+    try {
+      List<ResponseCommitModel> commitsList = [];
+      if ((state.model.limit * (state.model.page)) < state.model.total ||
+          state.model.total == 0) {
+        final response = await repository.fetchCommits(
+          owner,
+          repo,
+          page: state.model.page,
+          size: state.model.limit,
         );
-      } else {
-        commitsList = [...oldCommits ?? [], ...response];
 
-        return state.model.copyWith(
-          commits: commitsList,
-          total: 100,
-          limit: state.model.limit,
-          page: state.model.page + 1,
-          isLast: false,
-        );
+        if (response.isEmpty) {
+          return state.model.copyWith(
+            commits: oldCommits,
+            total: 100,
+            limit: state.model.limit,
+            page: state.model.page,
+            isLast: oldCommits!.isEmpty ? false : true,
+          );
+        } else {
+          commitsList = [...oldCommits ?? [], ...response];
+
+          return state.model.copyWith(
+            commits: commitsList,
+            total: 100,
+            limit: state.model.limit,
+            page: state.model.page + 1,
+            isLast: false,
+          );
+        }
       }
+      return state.model;
+    } catch (e) {
+      return state.model.copyWith(
+        commits: oldCommits,
+        total: 100,
+        limit: state.model.limit,
+        page: state.model.page,
+        isLast: true,
+      );
     }
-    return state.model;
   }
 
   void _onGetCommitsEvent(
@@ -63,11 +73,19 @@ class Bloc extends bloc.Bloc<Event, State> {
   ) async {
     emit(LoadingCommitsState(state.model));
     try {
+      final oldCommits = state.model.commits;
       final model = await _getCommits(
         owner: event.owner,
         repo: event.repo,
       );
-      emit(LoadedCommitsState(model));
+      if (oldCommits != null &&
+          model.commits != null &&
+          oldCommits.isEmpty &&
+          model.commits!.isEmpty) {
+        emit(ErrorState(state.model));
+      } else {
+        emit(LoadedCommitsState(model));
+      }
     } catch (error) {
       emit(ErrorState(state.model));
     }
@@ -93,6 +111,7 @@ class Bloc extends bloc.Bloc<Event, State> {
     emit(LoadingCommitsState(state.model.copyWith(
       commits: [],
       page: 0,
+      isLast: false,
       limit: 5,
     )));
     try {

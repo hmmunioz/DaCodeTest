@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:fulltimeforce_test/app/_childrens/commits/pages/commit_detail_page.dart';
+import 'package:fulltimeforce_test/app/constants/assets.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fulltimeforce_test/app/_childrens/commits/bloc/bloc.dart'
@@ -11,10 +13,10 @@ import '../../../models/response_commit_model.dart';
 
 import '../../../utils/helper.dart';
 
-class CommitTimelineUx extends StatelessWidget {
+class CommitTimeline extends StatelessWidget {
   final List<ResponseCommitModel> commitResponse;
   final bool isLast;
-  const CommitTimelineUx(
+  const CommitTimeline(
       {Key? key, required this.commitResponse, required this.isLast})
       : super(key: key);
   @override
@@ -58,7 +60,7 @@ class CommitTimelineUx extends StatelessWidget {
                     height: size.height * .07,
                     color: Colors.white,
                     indicator: Image.asset(
-                      "assets/images/timeline.png",
+                      AssetsUIValues.timeline,
                       height: 80,
                       width: 80,
                     ),
@@ -72,9 +74,9 @@ class CommitTimelineUx extends StatelessWidget {
                     commitMessage: commitResponseItem.commit.message,
                     userName: commitResponseItem.commit.author.name,
                     userEmail: commitResponseItem.commit.author.email,
-                    url: commitResponseItem.html_url,
-                    urlImage: commitResponseItem.author.avatar_url,
-                    sha: commitResponseItem.sha,
+                    imageUrl: commitResponseItem.author.avatarUrl,
+                    profileUrl: commitResponseItem.author.htmlUrl,
+                    commitUrl: commitResponseItem.htmlUrl,
                   ),
                   beforeLineStyle: const LineStyle(
                     color: Colors.white,
@@ -95,18 +97,19 @@ class _RightChild extends StatelessWidget {
     Key? key,
     required this.userName,
     required this.commitMessage,
+    required this.profileUrl,
+    required this.commitUrl,
     required this.userEmail,
-    required this.urlImage,
-    required this.url,
-    required this.sha,
+    required this.imageUrl,
   }) : super(key: key);
 
   final String userName;
   final String commitMessage;
   final String userEmail;
-  final String urlImage;
-  final String url;
-  final String sha;
+  final String imageUrl;
+  final String profileUrl;
+  final String commitUrl;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -119,70 +122,14 @@ class _RightChild extends StatelessWidget {
         children: [
           Row(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 2,
-                      ),
-                    ),
-                    child: ClipOval(
-                      child: Image.network(urlImage, width: 40, height: 40),
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height * .01,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    width: size.width * .22,
-                    child: Text(
-                      userName,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: size.height * .013,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
+              _DataProfile(
+                profileUrl: profileUrl,
+                userName: userName,
+                urlImage: imageUrl,
               ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                width: size.width * .27,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      commitMessage,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: size.height * .015,
-                          decoration: TextDecoration.underline),
-                    ),
-                    SizedBox(
-                      height: size.height * .01,
-                    ),
-                    Text(
-                      userEmail,
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColorLight,
-                        fontSize: size.height * .012,
-                      ),
-                    ),
-                  ],
-                ),
+              _CommitInfo(
+                commitMessage: commitMessage,
+                userEmail: userEmail,
               )
             ],
           ),
@@ -190,7 +137,7 @@ class _RightChild extends StatelessWidget {
             height: size.height * .01,
           ),
           _ButtonGoToBrowser(
-            url: url,
+            url: commitUrl,
           ),
         ],
       ),
@@ -220,6 +167,134 @@ class _LeftChild extends StatelessWidget {
           color: Theme.of(context).hintColor,
         ),
       ),
+    );
+  }
+}
+
+class _CommitInfo extends StatelessWidget {
+  const _CommitInfo({
+    Key? key,
+    required this.commitMessage,
+    required this.userEmail,
+  }) : super(key: key);
+
+  final String commitMessage;
+  final String userEmail;
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      padding: const EdgeInsets.all(5),
+      width: size.width * .25,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            commitMessage,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: size.height * .015,
+                decoration: TextDecoration.underline),
+          ),
+          SizedBox(
+            height: size.height * .01,
+          ),
+          Text(
+            userEmail,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+              fontSize: size.height * .012,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DataProfile extends StatelessWidget {
+  const _DataProfile({
+    Key? key,
+    required this.userName,
+    required this.profileUrl,
+    required this.urlImage,
+  }) : super(key: key);
+
+  final String userName;
+
+  final String profileUrl;
+
+  final String urlImage;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CommitDetailPage(
+                  urlCommit: profileUrl,
+                ),
+              ),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
+              ),
+            ),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: urlImage,
+                width: 40,
+                height: 40,
+                fit: BoxFit.contain,
+                placeholder: (context, url) => Container(
+                  width: 40,
+                  height: 40,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(5),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: size.height * .01,
+        ),
+        Container(
+          padding: const EdgeInsets.all(5),
+          width: size.width * .22,
+          child: Text(
+            userName,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: size.height * .013,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

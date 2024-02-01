@@ -20,3 +20,5 @@ class GetCommitsEvent extends Event {
 class ReloadCommitsEvent extends Event {}
 
 class GetMoreCommitsEvent extends Event {}
+
+class ClearCommitsEvent extends Event {}

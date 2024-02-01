@@ -78,9 +78,10 @@ class CommitDetailPageState extends State<CommitDetailPage>
         backgroundColor: Colors.white,
         body: InAppWebView(
           initialUrlRequest: URLRequest(
-              url: Uri.parse(
-            widget.urlCommit,
-          )),
+            url: Uri.parse(
+              widget.urlCommit,
+            ),
+          ),
           initialOptions: InAppWebViewGroupOptions(
             crossPlatform: InAppWebViewOptions(
                 javaScriptEnabled: true, cacheEnabled: false),

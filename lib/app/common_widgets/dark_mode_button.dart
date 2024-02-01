@@ -22,12 +22,19 @@ class DarkModeButtonState extends State<DarkModeButton> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: _onChange,
-      child: Icon(
-        Icons.dark_mode,
-        color: Theme.of(context).cardColor,
-        size: size.width * widget.sizeIcon,
+    return Container(
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Theme.of(context).primaryColorLight,
+      ),
+      child: GestureDetector(
+        onTap: _onChange,
+        child: Icon(
+          Icons.dark_mode,
+          color: Theme.of(context).hintColor,
+          size: size.width * widget.sizeIcon,
+        ),
       ),
     );
   }

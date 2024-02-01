@@ -10,19 +10,11 @@
     "search" : "Buscar...",
     "results":"Resultados:",
     "info":"Información",
-    "overview": "Descripción",
-    "releaseDate":"Lanzamiento",
-    "rating":"Calificación",
-    "genre":"Género",
-    "origin_country":"País de origen:",
-    "actors":"Actores",
     "language":"Lenguaje",
-    "seasons":"Temporadas",
-    "season":"Temporada",
-    "episodes":"Episodios",
-    "episode":"Episodio",
     "view":"Ver",
     "title":"Título",
     "copytext":"Copiado al portapapeles",
-    "open":"Abrir"
+    "open":"Abrir",
+    "repo":"Repo",
+    "owner":"User"
 }

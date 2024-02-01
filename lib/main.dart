@@ -1,7 +1,6 @@
 import 'package:fulltimeforce_test/app/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var delegate = await LocalizationDelegate.create(
       fallbackLocale: 'es_ES', supportedLocales: ['en_US', 'es_ES']);
-  await dotenv.load(fileName: ".env");
+
   if (Platform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
     var swAvailable = await AndroidWebViewFeature.isFeatureSupported(

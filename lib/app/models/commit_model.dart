@@ -11,7 +11,6 @@ class CommitModel {
   final String message;
   final TreeModel tree;
   final String url;
-  final int comment_count;
 
   CommitModel({
     required this.author,
@@ -19,7 +18,6 @@ class CommitModel {
     required this.message,
     required this.tree,
     required this.url,
-    required this.comment_count,
   });
 
   factory CommitModel.fromJson(Map<String, dynamic> json) =>

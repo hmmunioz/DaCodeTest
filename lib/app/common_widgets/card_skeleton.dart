@@ -10,7 +10,7 @@ class CardSkeleton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.blueGrey,
         borderRadius: BorderRadius.circular(14.0),
         boxShadow: const [
           BoxShadow(
@@ -23,11 +23,9 @@ class CardSkeleton extends StatelessWidget {
       ),
       padding: const EdgeInsets.only(
         bottom: 23.0,
-        /*   left: 10,
-        right: 10, */
         top: 17.0,
       ),
-      width: size.width * .5,
+      width: size.width * .45,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,8 +37,9 @@ class CardSkeleton extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Shimmer(
-                height: 120.0,
-                width: 60.0,
+                height: 50.0,
+                width: 50.0,
+                radius: 17,
               ),
             ),
           ),
@@ -77,26 +76,7 @@ class CardSkeleton extends StatelessWidget {
                     width: 95,
                     height: 18,
                   ),
-                  SizedBox(height: 4),
-                  Shimmer(
-                    width: 42,
-                    height: 10,
-                  ),
                 ],
-              ),
-            ),
-          ),
-          const Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: 5.0,
-                right: 16.0,
-              ),
-              child: Shimmer(
-                width: 33.0,
-                height: 33.0,
-                radius: 17.0,
               ),
             ),
           ),

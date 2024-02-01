@@ -8,7 +8,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../common_widgets/flag_language.dart';
 import '../../../theme/theme_notifier.dart';
 

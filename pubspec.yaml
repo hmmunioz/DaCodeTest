@@ -36,10 +36,8 @@ dependencies:
   flutter_bloc: ^8.1.2
   http: ^0.13.5
   cached_network_image: ^3.1.0
-  flutter_dotenv: ^5.0.2
   flutter_translate: ^4.0.3
   google_fonts: ^4.0.3
-  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   animate_do: ^3.0.2
   country_code_picker: ^3.0.0
@@ -48,12 +46,12 @@ dependencies:
   bloc_test: ^9.1.1
   responsive_framework: ^1.0.0
   json_annotation: ^4.0.1
-  build_runner: ^2.1.2
   timeline_tile: ^2.0.0
   flutter_inappwebview: ^5.8.0
 
 dev_dependencies:
   json_serializable: ^6.5.4
+  build_runner: ^2.1.2
 
   flutter_test:
     sdk: flutter
@@ -78,7 +76,6 @@ flutter:
   assets:
     - assets/images/
     - assets/i18n/
-    - .env
   fonts:
     - family: MarvelRegular
       fonts:

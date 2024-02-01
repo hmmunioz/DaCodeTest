@@ -1,6 +1,6 @@
 # FulltimeForce Test
 
-This is a test application for the FulltimeForce company, which consists of showing a card with the information of a commits, in addition to showing its seasons, chapters and details of each chapter. It also has a search engine to choose other commits.
+This is a test application for the FulltimeForce company, which consists of showing a list of cards with a commits information, like author, message, date and other data with pagination and pull refresh.
 ## How to Use
 
 **Step 1:**
@@ -8,11 +8,16 @@ This is a test application for the FulltimeForce company, which consists of show
 Download or clone this repo by using the link below:
 
 ```
-git@github.com:hmmunioz/DaCodeTest.git
+git@github.com:hmmunioz/fulltimeForceTest.git
 ```
 
 **Step 2:**
-Make sure that the .env file is at the root of the project since it has the api key
+
+if you want to changing a repo you need modify 2 values in constants.dart file
+```
+  static const owner = 'hmmunioz';
+  static const repo = 'fulltimeForceTest';
+```
 
 
 Go to project root and execute the following command in console to get the required dependencies:
@@ -29,9 +34,9 @@ flutter run
 
 ## FulltimeForce Features:
 
-- Serie
-- Season
-- Episode
+- Commits
+- Detail Commits
+- Detail Profile
 
 
 ### Libraries & Tools Used
@@ -43,10 +48,8 @@ flutter run
 - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
 - [http](https://pub.dev/packages/http)
 - [cached_network_image](https://pub.dev/packages/cached_network_image)
-- [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
 - [flutter_translate](https://pub.dev/packages/flutter_translate)
 - [google_fonts](https://pub.dev/packages/google_fonts)'
-- [carousel_slider](https://pub.dev/packages/carousel_slider)
 - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 - [animate_do](https://pub.dev/packages/animate_do)
 - [country_code_picker](https://pub.dev/packages/country_code_picker)
@@ -63,6 +66,7 @@ Here is the core folder structure which flutter provides.
 ```
 FulltimeForce_test/
 |- android
+|- assets
 |- build
 |- ios
 |- lib
@@ -75,7 +79,7 @@ Here is the folder structure we have been using in this project
 lib/
 |- app/
   |- _childrens/
-     |- serie/
+     |- commits/
        |- bloc
        |- pages
        |- widgets
@@ -87,7 +91,6 @@ lib/
   |- theme/
   |- utils/
 |- main.dart
-|- .env
 ```
 
 

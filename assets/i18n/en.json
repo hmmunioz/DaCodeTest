@@ -10,19 +10,11 @@
     "search" : "Search...",  
     "results":"Result:",
     "info":"Info",
-    "overview": "Overview",
-    "releaseDate":"Release Date",
-    "rating":"Rating",
-    "genre":"Genre",
-    "origin_country":"Origin Country:",
-    "actors":"Actors",
     "language":"Language",
-    "seasons":"Seasons",
-    "season":"Season",
-    "episodes":"Episodes",
-    "episode":"Episode",
     "view":"View",
     "title":"Title",
     "copytext":"Copy to clipboard",
-    "open":"Open"
+    "open":"Open",
+    "repo":"Repo",
+    "owner":"User"
   }

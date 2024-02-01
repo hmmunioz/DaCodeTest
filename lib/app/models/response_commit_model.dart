@@ -8,22 +8,21 @@ part 'response_commit_model.g.dart';
 @JsonSerializable()
 class ResponseCommitModel {
   final String sha;
-  final String node_id;
+
   final CommitModel commit;
   final String url;
-  final String html_url;
-  final String comments_url;
+  @JsonKey(name: 'html_url')
+  final String htmlUrl;
+
   final UserInfoModel author;
   final UserInfoModel committer;
   final List<ParentModel> parents;
 
   ResponseCommitModel({
     required this.sha,
-    required this.node_id,
     required this.commit,
     required this.url,
-    required this.html_url,
-    required this.comments_url,
+    required this.htmlUrl,
     required this.author,
     required this.committer,
     required this.parents,

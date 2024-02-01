@@ -5,9 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:fulltimeforce_test/app/_childrens/commits/bloc/bloc.dart'
     as bloc;
-
 import 'package:flutter_translate/flutter_translate.dart';
-
 import '../../../constants/constants.dart';
 import '../../../models/response_commit_model.dart';
 import '../widgets/timelime_commit_ux.dart';
@@ -25,14 +23,13 @@ class CommitsPage extends StatelessWidget {
             ConstantsValues.repo,
           ),
         ),
-      child: _Content(),
+      child: const _Content(),
     );
   }
 }
 
 class _Content extends StatelessWidget {
-  _Content({Key? key}) : super(key: key);
-  final TextEditingController _searchController = TextEditingController();
+  const _Content({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -64,6 +61,10 @@ class _Content extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
+                  height: size.height * .03,
+                ),
+                const _TitleScreen(),
+                SizedBox(
                   height: size.height * .02,
                 ),
                 BlocBuilder<bloc.Bloc, bloc.State>(
@@ -79,10 +80,7 @@ class _Content extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<bloc.Bloc>()
-                                .add(const bloc.GetCommitsEvent(
-                                  ConstantsValues.owner,
-                                  ConstantsValues.repo,
-                                ));
+                                .add(bloc.ReloadCommitsEvent());
                           },
                         ),
                       );
@@ -93,10 +91,7 @@ class _Content extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<bloc.Bloc>()
-                                .add(const bloc.GetCommitsEvent(
-                                  ConstantsValues.owner,
-                                  ConstantsValues.repo,
-                                ));
+                                .add(bloc.ReloadCommitsEvent());
                           },
                         ),
                       );
@@ -108,7 +103,7 @@ class _Content extends StatelessWidget {
                     } else {
                       if (commitsResponse != null &&
                           commitsResponse.isNotEmpty) {
-                        return CommitTimelineUx(
+                        return CommitTimeline(
                           commitResponse: commitsResponse,
                           isLast: state.model.isLast,
                         );
@@ -126,6 +121,71 @@ class _Content extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.refresh,
+          color: Theme.of(context).primaryColor,
+        ),
+        backgroundColor: Colors.white,
+        mini: true,
+        onPressed: () {
+          context.read<bloc.Bloc>().add(bloc.ReloadCommitsEvent());
+        },
+      ),
+    );
+  }
+}
+
+class _TitleScreen extends StatelessWidget {
+  const _TitleScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Row(
+          children: [
+            Text(
+              "${translate("owner")}: ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).hintColor,
+                fontSize: size.width * .029,
+              ),
+            ),
+            Text(
+              ConstantsValues.owner,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorDark,
+                fontSize: size.width * .029,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Text(
+              "${translate("repo")}: ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).hintColor,
+                fontSize: size.width * .029,
+              ),
+            ),
+            Text(
+              ConstantsValues.repo,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorDark,
+                fontSize: size.width * .029,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

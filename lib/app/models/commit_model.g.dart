@@ -12,7 +12,6 @@ CommitModel _$CommitModelFromJson(Map<String, dynamic> json) => CommitModel(
       message: json['message'] as String,
       tree: TreeModel.fromJson(json['tree'] as Map<String, dynamic>),
       url: json['url'] as String,
-      comment_count: json['comment_count'] as int,
     );
 
 Map<String, dynamic> _$CommitModelToJson(CommitModel instance) =>
@@ -22,5 +21,4 @@ Map<String, dynamic> _$CommitModelToJson(CommitModel instance) =>
       'message': instance.message,
       'tree': instance.tree,
       'url': instance.url,
-      'comment_count': instance.comment_count,
     };
